@@ -34,7 +34,7 @@ class _WelcomePageState extends State<WelcomePage> {
           SizedBox(
             height: 30.0,
           ),
-          Text("  Welcome\n         To\nVoice Bloom",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.black)),
+          Text("  Welcome\n         To\n     Echoo",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.black)),
           SizedBox(
             height: 30.0,
           ),

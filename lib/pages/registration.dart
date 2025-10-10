@@ -15,7 +15,11 @@ class _RegistrationState extends State<Registration> {
   final _formKey = GlobalKey<FormState>();
   moveToHome(BuildContext context){
     if(_formKey.currentState!.validate()) {
-      Navigator.pushNamed(context, MyRoutes.homeRoute);
+      Navigator.pushNamed(context, MyRoutes.homeRoute,arguments: {
+        "name": name,
+        "age": age,
+        "gender": selectedGender,
+      },);
     }
 
   }

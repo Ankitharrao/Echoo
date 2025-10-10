@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:voicebloom/pages/subcategories/family_page.dart';
+import 'package:voicebloom/pages/subcategories/food_page.dart';
+import 'package:voicebloom/pages/subcategories/activity_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,19 +15,44 @@ class _HomePageState extends State<HomePage> {
   final FlutterTts flutterTts = FlutterTts();
   final List<Map<String,String>> items =[
     {"images":"assets/images/food.png","text":"Food"},
-    {"images":"assets/images/hygiene.png","text":"Hygiene"},
+    {"images":"assets/images/hygiene.png","text":"Activity"},
     {"images":"assets/images/family.png","text":"Family"},
 
 
   ];
+
   Future<void> _speak(String text) async{
     await flutterTts.setLanguage("en-IN");
     await flutterTts.setPitch(1.0);
     await flutterTts.setSpeechRate(0.5);
     await flutterTts.speak(text);
   }
+  void _navigateToCategory(String category) {
+    Widget page;
+    switch (category) {
+      case "Food":
+        page = const FoodPage();
+        break;
+      case "Activity":
+        page = const ActivityPage();
+        break;
+      case "Family":
+        page = const FamilyPage();
+        break;
+      default:
+        page = Scaffold(body: Center(child: Text("Page not found")));
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => page,
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -37,6 +65,11 @@ class _HomePageState extends State<HomePage> {
             final item=items[index];
             return GestureDetector(
               onTap: ()=> _speak(item["text"]!),
+              onVerticalDragEnd: (details){
+                if(details.primaryVelocity!<0){
+                  _navigateToCategory(item["text"]!);
+                }
+              },
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -73,3 +106,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
