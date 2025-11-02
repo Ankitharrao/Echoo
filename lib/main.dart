@@ -17,6 +17,7 @@ class myApp extends StatelessWidget {
 
     return MaterialApp(
 
+
       themeMode: ThemeMode.light,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
@@ -29,9 +30,13 @@ class myApp extends StatelessWidget {
       ),
 
         initialRoute: "/welcome",
+
         routes: {
         "/": (context) => Registration(),
-          MyRoutes.homeRoute: (context) =>HomePage(),
+          MyRoutes.homeRoute: (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          return HomePage( name: args['name'],age:args['age'],gender: args['gender'], ); },
+
           "/welcome": (context)=>WelcomePage(),
     },
 

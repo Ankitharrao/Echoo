@@ -36,7 +36,13 @@ class FamilyPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(item["images"]!, height: 350),
+                  SizedBox(
+                    height: 400,
+                    child: Image.asset(
+                      item["images"]!,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   const SizedBox(height: 30),
                   Text(
                     item["text"]!,

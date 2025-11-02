@@ -5,7 +5,13 @@ import 'package:voicebloom/pages/subcategories/food_page.dart';
 import 'package:voicebloom/pages/subcategories/activity_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String name;
+  final int age;
+  final String gender;
+  const HomePage({super.key,required this.name,required this.age,required  this.gender});
+
+
+
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -13,15 +19,29 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final FlutterTts flutterTts = FlutterTts();
-  final List<Map<String,String>> items =[
-    {"images":"assets/images/food.png","text":"Food"},
-    {"images":"assets/images/hygiene.png","text":"Activity"},
-    {"images":"assets/images/family.png","text":"Family"},
+  final List<Map<String, String>> items = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Add common items
+    items.addAll([
+      {"images": "assets/images/food.png", "text": "Food"},
+      {"images": "assets/images/hygiene.png", "text": "Activity"},
+      {"images": "assets/images/family.png", "text": "Family"},
+    ]);
+
+    // Conditionally add "Periods"
+    if (widget.age > 10 && widget.gender.toLowerCase() == 'female') {
+      items.add({"images": "assets/images/food.png", "text": "Periods"});
+    }
+  }
 
 
-  ];
 
   Future<void> _speak(String text) async{
+    await flutterTts.stop();
     await flutterTts.setLanguage("en-IN");
     await flutterTts.setPitch(1.0);
     await flutterTts.setSpeechRate(0.5);
@@ -52,11 +72,15 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
+    //final String name;
+
+
+
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("echo"),
+        title: Text(widget.name),
         backgroundColor: Colors.blue,
       ),
       body: PageView.builder(
@@ -83,11 +107,15 @@ class _HomePageState extends State<HomePage> {
 
                       children: [
 
-                        ElevatedButton.icon(onPressed: ()=>_speak("I want " + item["text"]!), icon: Icon(Icons.check),label:Text("yes"),
-                            style: ElevatedButton.styleFrom(backgroundColor: Colors.green)),
-                        ElevatedButton.icon(onPressed: ()=>_speak(item["text"]!), icon: Icon(Icons.volume_up),label:Text("speak")),
-                        ElevatedButton.icon(onPressed: ()=>_speak("I don't want" + item["text"]!), icon: Icon(Icons.do_not_disturb_alt_outlined),label:Text("no"),
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.red)),
+                        ElevatedButton.icon(onPressed: ()=>_speak("I want " + item["text"]!), icon: Icon(Icons.check,size:32),label:Text("yes",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
+                            style: ElevatedButton.styleFrom(backgroundColor: Colors.green,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            padding: const EdgeInsets.symmetric(horizontal:28,vertical:15))),
+                        SizedBox(width: 40.0,),
+
+                        ElevatedButton.icon(onPressed: ()=>_speak("I don't want" + item["text"]!), icon: Icon(Icons.do_not_disturb_alt_outlined,size: 32,),label:Text("no",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.red,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            padding: const EdgeInsets.symmetric(horizontal:28,vertical:15))),
                       ],
                     ),
 
