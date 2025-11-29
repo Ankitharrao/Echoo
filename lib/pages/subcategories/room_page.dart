@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-class FamilyPage extends StatelessWidget {
-  const FamilyPage({super.key});
+class RoomPage extends StatelessWidget {
+  const RoomPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +15,18 @@ class FamilyPage extends StatelessWidget {
     }
 
     final List<Map<String, String>> foodItems = [
-      {"images": "assets/images/boyfather.png", "text": "Father"},
-      {"images": "assets/images/girlmother.png", "text": "Mother"},
-      {"images": "assets/images/grandmother.png", "text": "Grand Mother"},
-      {"images": "assets/images/grandfather.png", "text": "Grand Father"},
-      {"images": "assets/images/brother.png", "text": "Brother"},
-      {"images": "assets/images/sister.png", "text": "sister"},
-
+      {"images": "assets/images/livingroom.png", "text": "Living room"},
+      {"images": "assets/images/bedroom.png", "text": "Bed room"},
+      {"images": "assets/images/toilet.png", "text": "Toilet"},
+      {"images": "assets/images/diningroom.png", "text": "Dining room"},
+      {"images": "assets/images/bathroom.png", "text": "Bath room"},
+      {"images": "assets/images/kitchen.png", "text": "Kitchen"},
     ];
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Family"),
+        title: const Text("Room"),
         backgroundColor: Colors.orange,
       ),
       body: PageView.builder(
@@ -59,14 +58,14 @@ class FamilyPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment:MainAxisAlignment.center,
                     children: [
-                      ElevatedButton.icon(onPressed: ()=>_speak("I want " + item["text"]!), icon: Icon(Icons.check),label:Text("yes"),
+                      ElevatedButton.icon(onPressed: ()=>_speak("I want to go to " + item["text"]!), icon: Icon(Icons.check),label:Text("yes"),
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.green)),
                       ElevatedButton.icon(
                         onPressed: () => _speak(item["text"]!),
                         icon: const Icon(Icons.volume_up),
                         label: const Text("Speak"),
                       ),
-                      ElevatedButton.icon(onPressed: ()=>_speak("I don't want " + item["text"]!), icon: Icon(Icons.do_not_disturb_alt_outlined),label:Text("no"),
+                      ElevatedButton.icon(onPressed: ()=>_speak("I don't want to go to " + item["text"]!), icon: Icon(Icons.do_not_disturb_alt_outlined),label:Text("no"),
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.red)),
                     ],
                   ),

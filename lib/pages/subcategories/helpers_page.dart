@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-class FamilyPage extends StatelessWidget {
-  const FamilyPage({super.key});
+class HelpersPage extends StatelessWidget {
+  const HelpersPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +15,17 @@ class FamilyPage extends StatelessWidget {
     }
 
     final List<Map<String, String>> foodItems = [
-      {"images": "assets/images/boyfather.png", "text": "Father"},
-      {"images": "assets/images/girlmother.png", "text": "Mother"},
-      {"images": "assets/images/grandmother.png", "text": "Grand Mother"},
-      {"images": "assets/images/grandfather.png", "text": "Grand Father"},
-      {"images": "assets/images/brother.png", "text": "Brother"},
-      {"images": "assets/images/sister.png", "text": "sister"},
+      {"images": "assets/images/teacher.png", "text": "Teacher"},
+      {"images": "assets/images/doctor.png", "text": "Doctor"},
+      {"images": "assets/images/police.png", "text": "Police"},
+
 
     ];
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Family"),
+        title: const Text("Helpers"),
         backgroundColor: Colors.orange,
       ),
       body: PageView.builder(
